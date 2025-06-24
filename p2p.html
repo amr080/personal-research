@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Proposal - Alexander Reed</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: black;
+            background-color: white;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h2 {
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        h3 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .author-info {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .hypothesis {
+            font-style: italic;
+            margin-top: 10px;
+        }
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .equation {
+            font-family: 'Times New Roman', serif;
+            text-align: center;
+            margin: 20px 0;
+            font-style: italic;
+        }
+        .variable-list {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Research Proposal</h1>
+    <div class="author-info">
+        <strong>Alexander Reed</strong><br>
+        June 23, 2025
+    </div>
+
+    <h2>Research Question</h2>
+    <p>Does peer-to-peer transferability of yield-bearing stablecoins (X) reduce aggregate systemic risk (Y) relative to traditional mutual funds during financial stress?</p>
+    <p class="hypothesis">[Hypothesis: Higher stablecoin share → Lower MMF redemption rates during stress]</p>
+
+    <h2>Motivation</h2>
+    <p>Stablecoins have exploded from $5 billion to $241 billion in market capitalization, with transaction volumes reaching $34.8 trillion annually, matching Visa's payment volume. This growth reflects genuine utility: cross-border payments at near-zero cost, 24/7 operation without banking intermediaries, and peer-to-peer transferability enabling direct spending rather than redemption through fund companies. Companies like SpaceX use stablecoins for corporate treasury management, while the innovation's greatest promise lies in yield-bearing stablecoins that, for example, could allow retirees to receive spendable dollars directly from pension portfolios, eliminating the redemption pressure that forces destructive asset fire sales.</p>
+    
+    <p>However, March 2023's USDC crisis, when Circle's $3.3 billion SVB exposure caused the stablecoin to trade below $0.90, revealed that stablecoins can amplify rather than contain systemic risk. The Federal Reserve Bank of Boston warns that stablecoins exhibit the same vulnerabilities as money market funds: liquidity transformation, threshold effects, and contagion risks. With Congress advancing the GENIUS Act to legitimize stablecoins and projections reaching $3.7 trillion by 2030, understanding whether P2P transferability reduces or amplifies the systemic risks that cost taxpayers hundreds of billions in 2008 and 2020 MMF bailouts becomes the most consequential financial stability question of our time. As Treasury officials examine digital dollar frameworks, empirical evidence on whether yield-bearing stablecoins solve or exacerbate redemption-driven instability is crucial for preventing the next financial crisis while capturing blockchain's transformative benefits.</p>
+
+    <h2>Discussion</h2>
+    <p>Oefele, Baur, and Smales (2024) study flight-to-quality flows between stablecoins and money market funds during the March 2023 crisis. They use daily data for 11 stablecoins and 223 funds from January 2022 to March 2023 and apply an event study around the SVB collapse. They find that stress triggered 6 percent inflows into money market funds and 2.3 percent outflows from stablecoins. Within those categories, government funds gained 8.8 percent while USDC lost 22.7 percent. These results show that stablecoins amplified systemic risk rather than acted as safe havens. My research will test whether peer-to-peer transferability can reverse this pattern, reduce instability, and focuses on tokenized money market funds, not stablecoins.</p>
+    
+    <p>Anadu et al. (2025) examine the redemption activity of retail investors in prime money market funds, over two stress periods in 2008 and 2020. They find that, on average, retail investors' redemptions during 2020's stress period were substantially larger than those from 2008's.</p>
+    
+    <p>Anadu et al. (2024) show stablecoins exhibit flight-to-safety dynamics similar to MMFs, with flows from riskier to safer stablecoins during stress and a "break-the-buck" threshold at $1 below which redemptions accelerate. My research tests whether P2P transferability in tokenized MMFs could reduce the redemption pressure they identify, transforming run-vulnerable assets into more stable alternatives during financial stress.</p>
+
+    <h2>Data</h2>
+    <p><strong>Individual-level fund data from multiple sources:</strong></p>
+    <ul>
+        <li>iMoneyNet MMF Database: Daily/weekly flows, AUM, yields for 2,000+ US funds</li>
+        <li>SEC Form N-MFP: Monthly holdings and redemptions for all registered MMFs</li>
+        <li>Visa Onchain Analytics: Daily stablecoin P2P transaction volumes</li>
+        <li>RWA.xyz Treasuries: Tokenized MMF on-chain activity and flows</li>
+    </ul>
+    
+    <p><strong>Unit of interest:</strong> Fund-level</p>
+    <p><strong>Aggregate transaction data to calculate fund-level variables for each time period</strong></p>
+    
+    <p><strong>Y<sub>it</sub>:</strong> SRISK contribution of fund i at time t (systemic risk measure)</p>
+    
+    <p><strong>X<sub>it</sub>:</strong> Binary indicator for whether fund operates as tokenized MMF</p>
+    <ul class="variable-list">
+        <li>X<sub>it</sub> = 1 if fund issues P2P-transferable tokens backed by MMF shares</li>
+        <li>X<sub>it</sub> = 0 if fund operates as traditional MMF without tokenization</li>
+    </ul>
+    
+    <p><strong>Stress<sub>t</sub>:</strong> Crisis period dummy</p>
+    <ul class="variable-list">
+        <li>Stress<sub>t</sub> = 1 during March 9-12, 2023 (SVB banking crisis)</li>
+        <li>Stress<sub>t</sub> = 0 during normal market conditions</li>
+    </ul>
+    
+    <p><strong>Controls:</strong> Fund size (log assets), leverage ratio, weekly liquid assets percentage, investor composition (institutional vs retail share)</p>
+
+    <h2>Empirical Strategy</h2>
+    <h3>Difference-in-Differences (DiD)</h3>
+    <p>The setting fits DiD perfectly because we have a clear treatment group (tokenized MMFs with P2P transferability), control group (traditional MMFs), and exogenous shock timing (March 2023 SVB crisis). The parallel trends assumption is plausible since both fund types operate under similar regulatory frameworks and invest in comparable assets.</p>
+    
+    <p><strong>Regression Equation:</strong></p>
+    <div class="equation">
+        SRISK<sub>i,t</sub> = α + β₁(TokenizedMMF<sub>i</sub> × Stress<sub>t</sub>) + β₂(TokenizedMMF<sub>i</sub>) + β₃(Stress<sub>t</sub>) + β₄(Controls<sub>i,t</sub>) + δ<sub>i</sub> + γ<sub>t</sub> + ε<sub>i,t</sub>
+    </div>
+    
+    <p><strong>Component Labels:</strong></p>
+    <ul>
+        <li>SRISK<sub>i,t</sub>: Systemic risk contribution of fund i at time t (dependent variable)</li>
+        <li>TokenizedMMF<sub>i</sub>: Binary treatment indicator (1 if tokenized MMF, 0 if traditional)</li>
+        <li>Stress<sub>t</sub>: Crisis period dummy (1 during March 9-12, 2023 SVB crisis, 0 otherwise)</li>
+        <li>β₁: Coefficient of interest - differential effect of tokenization during stress</li>
+        <li>Controls<sub>i,t</sub>: Fund size (log assets), leverage ratio, weekly liquid assets percentage</li>
+        <li>δ<sub>i</sub>: Fund fixed effects (controls for time-invariant fund characteristics)</li>
+        <li>γ<sub>t</sub>: Time fixed effects (controls for market-wide trends)</li>
+    </ul>
+    
+    <p><strong>Why This Works:</strong></p>
+    <p>The March 2023 SVB crisis provides exogenous variation in stress timing, unrelated to fund-specific tokenization decisions. During this period, traditional MMFs experienced significant redemption pressure while tokenized funds with P2P capabilities should theoretically experience lower redemptions as investors can transfer tokens directly rather than redeem through the fund.</p>
+
+    <h2>Endogeneity Challenges</h2>
+    
+    <h3>Challenge 1: Distribution / Adoption Chain</h3>
+    <p>Many-to-many network problem. Collateral ubiquity. P2P transferability can only reduce redemptions if the entire payment value chain works. For example, if retirees can't spend shares at Walmart or traders can't use shares as trading collateral, tokenized mutual fund utility decreases.</p>
+    <p><strong>Solution:</strong></p>
+    
+    <h3>Challenge 2: Investor Type</h3>
+    <p>Patient investors (endowments) may choose tokenized funds while impatient traders stick to traditional MMFs. Lower redemptions could reflect investor type, not P2P transferability. Retail vs. institutional investor type.</p>
+    <p><strong>Solution:</strong> Control for investor type.</p>
+
+</body>
+</html>
